@@ -15,14 +15,26 @@ public class QueueSettingsService {
 
     public QueueSettings getSettings() {
         return queueSettingsRepository.findById(1)
-                .orElseGet(() -> {
-
-                    QueueSettings settings = new QueueSettings();
-                    settings.setMinutesPerPatient(5);
-                    settings.setQueueStatus(true);
-                    settings.setCreatedAt(LocalDateTime.now());
-                    settings.setUpdatedAt(LocalDateTime.now());
-                    return queueSettingsRepository.save(settings);
-                });
+                .orElseGet(this::createDefaultSettings);
     }
+
+    private QueueSettings createDefaultSettings() {
+        QueueSettings settings = new QueueSettings();
+        settings.setMinutesPerPatient(5);
+        settings.setQueueStatus(true);
+
+        return queueSettingsRepository.save(settings);
+    }
+    public QueueSettings updateMinutesPerPatient(Integer minutes) {
+        QueueSettings settings = getSettings();
+        settings.setMinutesPerPatient(minutes);
+        return queueSettingsRepository.save(settings);
+    }
+
+    public QueueSettings updateQueueStatus(Boolean status) {
+        QueueSettings settings = getSettings();
+        settings.setQueueStatus(status);
+        return queueSettingsRepository.save(settings);
+    }
+
 }
