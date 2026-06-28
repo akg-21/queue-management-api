@@ -25,6 +25,7 @@ public class QueueSettingsService {
 
         return queueSettingsRepository.save(settings);
     }
+
     public QueueSettings updateMinutesPerPatient(Integer minutes) {
         QueueSettings settings = getSettings();
         settings.setMinutesPerPatient(minutes);
@@ -35,6 +36,10 @@ public class QueueSettingsService {
         QueueSettings settings = getSettings();
         settings.setQueueStatus(status);
         return queueSettingsRepository.save(settings);
+    }
+
+    public boolean isQueueOpen() {
+        return getSettings().getQueueStatus();
     }
 
 }
