@@ -14,7 +14,9 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "queue")
+@Table(name = "queue", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"queueDate", "tokenNumber"})
+})
 public class Queue {
 
     @Id

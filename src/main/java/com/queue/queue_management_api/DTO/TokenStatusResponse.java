@@ -18,5 +18,7 @@ public class TokenStatusResponse {
     private Integer queuePosition;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
-
+    private Integer currentlyServing;
+    private Integer estimatedWaitTime;
+    private String status;
 }
